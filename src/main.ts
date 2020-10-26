@@ -73,6 +73,10 @@ async function dismissReview(pullRequest: {
   });
 
   reviews.data.forEach((review) => {
+    if (review.state == "DISMISSED") {
+        return
+    }
+
     if (review.user.login == "github-actions[bot]") {
       void githubClient.pulls.dismissReview({
         owner: pullRequest.owner,
